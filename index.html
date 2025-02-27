@@ -15,7 +15,7 @@
   </head>
 
   <body
-    class="font-(family-name:--font-outfit) bg-[#fefae0] flex flex-col overflow-x-hidden w-full min-h-screen leading-[1.6] p-5 sm:p-12"
+    class="font-(family-name:--font-outfit) text-xl flex flex-col overflow-x-hidden w-full min-h-screen leading-[1.6] p-5 sm:p-12 bg-[#fefae0]"
   >
     <main class="max-w-3xl text-left flex flex-col gap-10 w-full grow">
       <ul>
@@ -48,5 +48,66 @@
         </li>
       </ul>
     </main>
+
+    <button
+      id="partyButton"
+      class="flex w-auto mx-auto bg-transparent border-none text-4xl cursor-pointer transition-transform duration-200 ease-linear relative z-10 hover:animate-partyPulse mb-8"
+      onclick="togglePartyMode()"
+      aria-label="Toggle party mode"
+    >
+      🥳
+    </button>
+
+    <script>
+      function isPartyMode() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.has("🕺") && urlParams.get("🕺") === "💃";
+      }
+
+      function togglePartyMode() {
+        if (isPartyMode()) {
+          window.location.href = window.location.pathname;
+        } else {
+          window.location.href = window.location.pathname + "?🕺=💃";
+        }
+      }
+
+      function applyBackgroundStyle() {
+        const body = document.body;
+
+        if (isPartyMode()) {
+          body.classList.add("party");
+          createDancingEmojis();
+        } else {
+          body.classList.remove("party");
+        }
+      }
+
+      function createDancingEmojis() {
+        const emojis = ["💃", "🕺", "🎉", "🥳", "✨", "🎊", "🎵", "🎶"];
+        const container = document.createElement("div");
+        container.className =
+          "fixed top-0 left-0 w-full h-full pointer-events-none z-0 overflow-hidden";
+        document.body.appendChild(container);
+
+        for (let i = 0; i < 25; i++) {
+          setTimeout(() => {
+            const emoji = document.createElement("div");
+            emoji.className =
+              "absolute -top-[50px] pointer-events-none animate-floatDown";
+            emoji.textContent =
+              emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + "vw";
+            emoji.style.animationDuration = Math.random() * 3 + 3 + "s";
+            emoji.style.animationDelay = Math.random() * 5 + "s";
+            emoji.style.opacity = Math.random() * 0.5 + 0.2;
+            emoji.style.fontSize = Math.random() * 20 + 15 + "px";
+            container.appendChild(emoji);
+          }, i * 300);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", applyBackgroundStyle);
+    </script>
   </body>
 </html>
