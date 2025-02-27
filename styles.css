@@ -13,7 +13,10 @@
     --container-3xl: 48rem;
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
     --font-weight-medium: 500;
+    --tracking-wider: 0.05em;
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -31,6 +34,7 @@
     --default-mono-font-variation-settings: var(
       --font-mono--font-variation-settings
     );
+    --font-space-grotesk: "Space Grotesk", sans-serif;
     --font-outfit: "Outfit", sans-serif;
   }
 }
@@ -1355,6 +1359,13 @@
   .font-\(family-name\:--font-outfit\) {
     font-family: var(--font-outfit);
   }
+  .font-\(family-name\:--font-space-grotesk\) {
+    font-family: var(--font-space-grotesk);
+  }
+  .text-3xl {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
   .text-xl {
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
@@ -1370,6 +1381,10 @@
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
+  }
+  .tracking-wider {
+    --tw-tracking: var(--tracking-wider);
+    letter-spacing: var(--tracking-wider);
   }
   .text-balance {
     text-wrap: balance;
@@ -1967,6 +1982,16 @@
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
   }
 }
+.party {
+  h1, span:not(.emoji), a, p {
+    background: linear-gradient(to right, #ec4899, #a855f7, #6366f1);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: rainbow 3s ease infinite;
+  }
+}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
@@ -2069,6 +2094,10 @@
   inherits: false;
 }
 @property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
   syntax: "*";
   inherits: false;
 }
@@ -2283,5 +2312,16 @@
   }
   100% {
     background-position: 0% 0%;
+  }
+}
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
